@@ -1,0 +1,12 @@
+*.class
+*.log
+*.csv
+
+target/
+project/target/
+api/
+
+*.iml
+.idea
+
+output\.html
