@@ -15,17 +15,10 @@ case class Crimes(id: String,
                   latitude: Double,
                   longitude: Double)
 
-object DataAnalysis {
 
+// data cleaning and data process using spark
+class DataAnalysis extends Serializable {
   lazy val spark = SparkSession.builder().appName("AnalyzeCrime").master("local[*]").getOrCreate()
-
-  import spark.implicits._
-
-  def main(args: Array[String]): Unit = {
-    val (columns, initDf) = read("src/crime.csv")
-    val ds: Dataset[Crimes] = initDf.as[Crimes]
-    ds.show()
-  }
 
   /** @return The read DataFrame along with its column names. */
   def read(resource: String): (List[String], DataFrame) = {
@@ -35,8 +28,11 @@ object DataAnalysis {
     // Compute the schema based on the first line of the CSV file
     val schema = dfSchema(headerColumns)
 
-    val data = rdd.mapPartitionsWithIndex((i, it) => if (i == 0) it.drop(1) else it) // skip the header line
-      .map(_.split(",").to[List]).filter(x => x.size == 18).map(row)
+    val data = rdd
+      .mapPartitionsWithIndex((i, it) => if (i == 0) it.drop(1) else it) // skip the header line
+      .map(_.split(",").to[List])
+      .filter(x => x.size == 18 && x(14).length != 0) // data cleaning
+      .map(row)
 
     val dataFrame =
       spark.createDataFrame(data, schema)
@@ -83,5 +79,22 @@ object DataAnalysis {
     val latitude = line(14).toDouble
     val longitude = line(15).toDouble
     Row.fromSeq(List(id, offenseCode, offenseCodeGroup, offenseDescription, year, month, date, hour, dayOfWeek, street, latitude, longitude))
+  }
+}
+
+object DataAnalysis {
+
+  val DA = new DataAnalysis
+  import DA.spark.implicits._
+
+  def main(args: Array[String]): Unit = {
+    val (columns, initDf) = DA.read("src/crime.csv")
+    val ds: Dataset[Crimes] = initDf.as[Crimes]
+    ds.collect()
+    ds.show
+    //    val s = ds.select($"offenseCodeGroup").groupBy($"offenseCodeGroup").count
+    //    s.show
+    //    ds.show()
+    //    ds.printSchema()
   }
 }
