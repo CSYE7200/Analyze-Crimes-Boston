@@ -18,7 +18,34 @@ case class Crimes(id: String,
 
 // data cleaning and data process using spark
 class DataAnalysis extends Serializable {
+  lazy val sparkJoin = SparkSession.builder().appName("JoinTable").master("local[*]").getOrCreate()
   lazy val spark = SparkSession.builder().appName("AnalyzeCrime").master("local[*]").getOrCreate()
+
+
+  /** @return the joined DataFrame by crime.csv and code.csv  **/
+  def join(crimeCSV: String, codeCSV: String): DataFrame = {
+    val data = sparkJoin.read
+      .format("csv")
+      .option("header", "true")
+      .option("mode", "DROPMALFORMED")
+      .load(crimeCSV)
+      .dropDuplicates("INCIDENT_NUMBER")
+
+    val code = spark.read
+      .format("csv")
+      .option("header", "true")
+      .option("mode", "DROPMALFORMED")
+      .load(codeCSV)
+      .dropDuplicates("CODE")
+
+    val joined_df = data.join(code, data("OFFENSE_CODE") === code("CODE"), "outer")
+      .select(data("INCIDENT_NUMBER"), code("NAME"), data("OFFENSE_CODE_GROUP"), data("DISTRICT"), data("Lat"), data("Long"))
+      .sort(data("INCIDENT_NUMBER"))
+
+//    joined_df.collect().foreach(println)
+    joined_df
+  }
+
 
   /** @return The read DataFrame along with its column names. */
   def read(resource: String): (List[String], DataFrame) = {
