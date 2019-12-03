@@ -1,4 +1,3 @@
-import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql._
 import org.apache.spark.sql.types._
 
@@ -100,7 +99,7 @@ class DataAnalysis extends Serializable {
     val offenseDescription = line(3)
     val year = line(8).toInt
     val month = line(9).toInt
-    val date = line(7).split("\\W")(2).toInt
+    val date = line(7).split("\\W")(1).toInt
     val hour = line(11).toInt
     val dayOfWeek = line(10)
     val street = line(13)
@@ -116,16 +115,13 @@ object DataAnalysis {
   import DA.spark.implicits._
 
   def main(args: Array[String]): Unit = {
-    // 屏蔽不必要的日志显示终端上
-    Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
-    Logger.getLogger("org.eclipse.jetty.server").setLevel(Level.OFF)
 
     val (columns, initDf) = DA.read("src/crime.csv")
     val ds: Dataset[Crimes] = initDf.as[Crimes]
     ds.collect()
     ds.show
-    //    val s = ds.select($"offenseCodeGroup").groupBy($"offenseCodeGroup").count
-    //    s.show
+//        val s = ds.select($"offenseCodeGroup").groupBy($"offenseCodeGroup").count
+//        s.show
     //    ds.show()
     //    ds.printSchema()
   }
