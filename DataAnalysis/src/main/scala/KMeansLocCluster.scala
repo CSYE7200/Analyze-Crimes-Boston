@@ -1,3 +1,4 @@
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.Dataset
 
 import scala.annotation.tailrec
@@ -104,6 +105,10 @@ object KMeansLocCluster {
   import DA.spark.implicits._
 
   def main(args: Array[String]): Unit = {
+    // 屏蔽不必要的日志显示终端上
+    Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
+    Logger.getLogger("org.eclipse.jetty.server").setLevel(Level.OFF)
+
     val (columns, initDf) = DA.read("src/crime.csv")
     val ds: Dataset[Crimes] = initDf.as[Crimes]
     val kMeans = new KMeans
