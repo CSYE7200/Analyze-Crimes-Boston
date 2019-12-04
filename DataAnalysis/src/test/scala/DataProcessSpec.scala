@@ -1,10 +1,11 @@
-//import org.scalatest.tagobjects.Slow
+import org.apache.log4j.{Level, Logger}
 import org.scalatest.{BeforeAndAfter, FunSuite, Matchers}
 import org.apache.spark.sql._
 import org.apache.spark.sql.types._
 
 class DataProcessSpec extends FunSuite with Matchers with BeforeAndAfter {
-
+  Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
+  Logger.getLogger("org.eclipse.jetty.server").setLevel(Level.OFF)
   private val master = "local[*]"
   private val appName = "data_process_testing"
 
