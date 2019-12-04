@@ -104,6 +104,33 @@ object KMeansLocCluster {
 
   import DA.spark.implicits._
 
+
+//  def main(args: Array[String]): Unit = {
+//    val (columns, initDf) = DA.read("src/crime.csv")
+//    val ds: Dataset[Crimes] = initDf.as[Crimes]
+//    val kMeans = new KMeans
+//    val loc = ds.filter(x => x.latitude != -1.0 && x.longitude != -1.0) // filter incorrect values
+//    /**
+//     * get the latitude and longitude info from dataset
+//     * initialize 10 cluster centers (Randomly choose 10 from google map)
+//     */
+//    val location = for (p <- loc) yield Point(p.latitude, p.longitude)
+//    val initialPoints = Seq(
+//      Point(42.337170, -71.075436),
+//      Point(42.358284, -71.060151),
+//      Point(42.359682, -71.125615),
+//      Point(42.372825, -71.065957),
+//      Point(42.368745, -71.040402),
+//      Point(42.327528, -71.057069),
+//      Point(42.313024, -71.077571),
+//      Point(42.314067, -71.102221),
+//      Point(42.303542, -71.065528),
+//      Point(42.343135, -71.041523))
+//
+//    location.persist()
+//    val resultPoints = kMeans.kMeans(location.collect(), initialPoints, 50, 0)
+//    resultPoints.foreach(println)
+//  }
   def main(args: Array[String]): Unit = {
     // 屏蔽不必要的日志显示终端上
     Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
