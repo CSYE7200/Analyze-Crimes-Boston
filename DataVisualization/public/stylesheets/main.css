@@ -155,4 +155,9 @@ img.resize {
     width: 120%;
     display: inline-block;
 }
+
+.introduction {
+    font-size:20px;
+    font-weight: bold;
+}
  

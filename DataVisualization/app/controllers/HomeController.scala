@@ -42,8 +42,8 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.CrimeByHour())
   }
 
-  def HotSpot() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.HotSpot())
+  def CrimePrediction() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.CrimePrediction())
   }
   
 }

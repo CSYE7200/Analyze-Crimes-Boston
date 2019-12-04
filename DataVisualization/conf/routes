@@ -10,7 +10,7 @@ GET        /CrimeByDay             controllers.HomeController.CrimeByDay
 GET        /CrimeLocation         controllers.HomeController.CrimeLocation
 GET        /CrimeByHour        controllers.HomeController.CrimeByHour
 GET        /CrimeByMonth        controllers.HomeController.CrimeByMonth
-GET        /HotSpot               controllers.HomeController.HotSpot
+GET        /CrimePrediction               controllers.HomeController.CrimePrediction
 
 
 # Map static resources from the /public folder to the /assets URL path
