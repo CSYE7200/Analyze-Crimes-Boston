@@ -61,6 +61,7 @@ class DataAnalysis extends Serializable {
       .filter(x => x.size == 18 && x(14).length != 0) // data cleaning
       .map(row)
 
+
     val dataFrame =
       spark.createDataFrame(data, schema)
 
@@ -115,7 +116,7 @@ object DataAnalysis {
   import DA.spark.implicits._
 
   def main(args: Array[String]): Unit = {
-    val (columns, initDf) = DA.read("src/crime.csv")
+    val (columns, initDf) = DA.read("static/crime.csv")
     val ds: Dataset[Crimes] = initDf.as[Crimes]
     ds.collect()
     ds.show
