@@ -26,16 +26,20 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.CrimeTypes())
   }
 
-  def CrimeDate() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.CrimeDate())
+  def CrimeByMonth() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.CrimeByMonth())
+  }
+
+  def CrimeByDay() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.CrimeByDay())
   }
 
   def CrimeLocation() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.CrimeLocation())
   }
 
-  def IncidentNumber() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.IncidentNumber())
+  def CrimeByHour() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.CrimeByHour())
   }
 
   def HotSpot() = Action { implicit request: Request[AnyContent] =>

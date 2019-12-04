@@ -6,9 +6,10 @@
 # An example controller showing a sample home page
 GET        /                      controllers.HomeController.index
 GET        /CrimeTypes            controllers.HomeController.CrimeTypes
-GET        /CrimeDate             controllers.HomeController.CrimeDate
+GET        /CrimeByDay             controllers.HomeController.CrimeByDay
 GET        /CrimeLocation         controllers.HomeController.CrimeLocation
-GET        /IncidentNumber        controllers.HomeController.IncidentNumber
+GET        /CrimeByHour        controllers.HomeController.CrimeByHour
+GET        /CrimeByMonth        controllers.HomeController.CrimeByMonth
 GET        /HotSpot               controllers.HomeController.HotSpot
 
 
