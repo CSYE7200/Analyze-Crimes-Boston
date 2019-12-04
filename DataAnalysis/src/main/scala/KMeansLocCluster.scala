@@ -104,7 +104,7 @@ object KMeansLocCluster {
 
   import DA.spark.implicits._
 
-<<<<<<< HEAD
+
 //  def main(args: Array[String]): Unit = {
 //    val (columns, initDf) = DA.read("src/crime.csv")
 //    val ds: Dataset[Crimes] = initDf.as[Crimes]
@@ -131,7 +131,6 @@ object KMeansLocCluster {
 //    val resultPoints = kMeans.kMeans(location.collect(), initialPoints, 50, 0)
 //    resultPoints.foreach(println)
 //  }
-=======
   def main(args: Array[String]): Unit = {
     // 屏蔽不必要的日志显示终端上
     Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
@@ -162,5 +161,4 @@ object KMeansLocCluster {
     val resultPoints = kMeans.kMeans(location.collect(), initialPoints, 50, 0)
     resultPoints.foreach(println)
   }
->>>>>>> 3c66a9997fd2a7e011c14603bdc9886a8ad8d809
 }

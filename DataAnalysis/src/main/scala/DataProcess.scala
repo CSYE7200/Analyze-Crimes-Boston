@@ -116,12 +116,8 @@ object DataAnalysis {
   import DA.spark.implicits._
 
   def main(args: Array[String]): Unit = {
-<<<<<<< HEAD
     val (columns, initDf) = DA.read("static/crime.csv")
-=======
 
-    val (columns, initDf) = DA.read("src/crime.csv")
->>>>>>> 3c66a9997fd2a7e011c14603bdc9886a8ad8d809
     val ds: Dataset[Crimes] = initDf.as[Crimes]
     ds.collect()
     ds.show
