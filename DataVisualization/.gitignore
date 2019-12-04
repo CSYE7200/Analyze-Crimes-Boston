@@ -8,6 +8,7 @@
 
 target/
 project/target/
+sbt-dist/
 api/
 
 *.iml
