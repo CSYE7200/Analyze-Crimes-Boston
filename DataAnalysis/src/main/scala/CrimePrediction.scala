@@ -23,10 +23,10 @@ object CrimePrediction {
     val model = HoltWinters.fitModel(crimesCount, period, "additive", "BOBYQA")
 
 
-    val forecast = new DenseVector(new Array[Double](period))
+    val forecast = new DenseVector(new Array[Double](365))
     model.forecast(crimesCount, forecast)
 
-    for(i <- 0 until period)
-      println(forecast(i))
+    for(i <- 0 until 365)
+      println(i, forecast(i).toInt)
   }
 }
