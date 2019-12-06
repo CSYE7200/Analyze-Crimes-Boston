@@ -5,7 +5,7 @@
 2. Analyze results in Zepplin. Get results such as crimes by day, crimes by week, crimes by month, etc. Export the Zepplin results as Json file.
 3. Implemented K-Means algorithm to analyze criminal locations according to crime longitude and latitude. We got 10 clusters of criminal locations, and then visualized them with Jupyter and Folium library.
 4. Use Holt Winter model to predict crime numbers in the next 365 days according to crime numbers from 2015 to 2018
-
+5. Utilize Text Rank Algorithm to implement data search system
 
 # Part2: Visualize Results We Got From Boston Crime Analysis
 
