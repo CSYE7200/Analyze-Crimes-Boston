@@ -1,0 +1,14 @@
+@(userForm: Form[BasicForm])(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+
+@main("Scala Play forms tutorial") {
+  <h1>Scala Play forms tutorial</h1>
+
+    @helper.form(action = helper.CSRF(routes.HomeController.simpleFormPost())) {
+      @helper.inputText(userForm("month"))
+      @helper.inputText(userForm("day"))
+      @helper.inputText(userForm("year"))
+      @helper.inputText(userForm("street"))
+      @helper.inputText(userForm("ty"))
+      <input type="submit" value="Submit">
+    }
+}

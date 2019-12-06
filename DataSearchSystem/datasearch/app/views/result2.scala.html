@@ -1,0 +1,28 @@
+@(results: List[List[String]])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table class="searchResults">
+      <tr>
+        <th> Code Id </th>
+        <th> Name </th>
+        <th> Offense Group</th>
+        <th> Occurs Time</th>
+        <th> Street</th>
+        <th>Lat</th>
+        <th>Long</th>
+      </tr>
+    @for(s <- results){
+      <tr>
+        @for(e <- s){
+          <td>@e</td>
+        }
+      </tr>
+    }
+    </table>
+</body>
+</html>
