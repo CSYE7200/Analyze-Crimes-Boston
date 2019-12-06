@@ -1,0 +1,28 @@
+@()
+@main("TextRank") {
+    @defining(play.core.PlayVersion.current) { version =>
+        <section id="content">
+            <div class="wrapper doc">
+                <article>
+                    <form action="/TextRankResult">
+                        <label>INCIDENT_NUMBER</label>
+                        <input type="text" name="INCIDENT_NUMBER"><br>
+                        <label>OFFENSE_CODE_GROUP</label>
+                        <input type="text" name="OFFENSE_CODE_GROUP"><br>
+                        <label>OCCURRED_ON_DATE</label>
+                        <input type="text" name="OCCURRED_ON_DATE"><br>
+                        <label>STREET</label>
+                        <input type="text" name="STREET"><br>
+                        <label>Lat</label>
+                        <input type="text" name="Lat"><br>
+                        <label>Long</label>
+                        <input type="text" name="Long"><br>
+                        <input type="submit">
+                    </form>
+                </article> <aside>
+                @commonSidebar()
+            </aside>
+            </div>
+        </section>
+    }
+}

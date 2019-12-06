@@ -21,7 +21,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def index() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.index())
   }
-  
+
   def CrimeTypes() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.CrimeTypes())
   }
@@ -45,5 +45,16 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def CrimePrediction() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.CrimePrediction())
   }
-  
+
+  def TextRank() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.TextRank())
+  }
+
+  def TextRankResult() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.TextRankResult(List(
+      List("I182070945", "Larceny", "9/2/18 13:00", "LINCOLN ST", "42.358929", "-71.058823"),
+      List("I182070945", "Larceny", "9/2/18 13:00", "LINCOLN ST", "42.36779134", "-71.12937053"),
+      List("I182070945", "Larceny", "9/2/18 13:00", "LINCOLN ST", "42.34979134", "-71.10737053")
+    )))
+  }
 }

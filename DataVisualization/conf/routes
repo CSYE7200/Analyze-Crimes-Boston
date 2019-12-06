@@ -4,14 +4,15 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET        /                      controllers.HomeController.index
-GET        /CrimeTypes            controllers.HomeController.CrimeTypes
+GET        /                       controllers.HomeController.index
+GET        /CrimeTypes             controllers.HomeController.CrimeTypes
 GET        /CrimeByDay             controllers.HomeController.CrimeByDay
-GET        /CrimeLocation         controllers.HomeController.CrimeLocation
-GET        /CrimeByHour        controllers.HomeController.CrimeByHour
-GET        /CrimeByMonth        controllers.HomeController.CrimeByMonth
-GET        /CrimePrediction               controllers.HomeController.CrimePrediction
-
+GET        /CrimeLocation          controllers.HomeController.CrimeLocation
+GET        /CrimeByHour            controllers.HomeController.CrimeByHour
+GET        /CrimeByMonth           controllers.HomeController.CrimeByMonth
+GET        /CrimePrediction        controllers.HomeController.CrimePrediction
+GET        /TextRank               controllers.HomeController.TextRank
+GET        /TextRankResult         controllers.HomeController.TextRankResult
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file          controllers.Assets.versioned(path="/public", file: Asset)
+GET        /assets/*file           controllers.Assets.versioned(path="/public", file: Asset)
