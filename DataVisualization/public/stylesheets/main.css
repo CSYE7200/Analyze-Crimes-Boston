@@ -161,4 +161,24 @@ img.resize {
     font-weight: bold;
 }
 
+dt, dd, label, input {
+    margin:10px;
+    display: inline-block;
+}
+
+dt, label {
+    width:100px;
+}
 table,td,th{border:1px solid #000000;border-collapse:collapse;}
+form{
+    display: inline-block;
+    margin-left:auto;
+}
+input{
+    width:250px;
+    height: 30px;
+}
+
+.info{
+    display: none;
+}

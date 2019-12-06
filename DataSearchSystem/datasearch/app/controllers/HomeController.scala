@@ -98,7 +98,8 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def getSearchResult(formdata : BasicForm): List[List[String]] ={
-    var bufferedSource = Source.fromFile("/Users/saigou/Downloads/data.csv")
+    var bufferedSource = Source.fromFile("/Users/steve/IDEAProjects/CSYE7200_FinalProject/DataSearchSystem/datasearch/app/controllers/data2.csv")
+    // var bufferedSource = Source.fromFile("/Users/saigou/Downloads/data.csv")
     var resultList: List[List[String]] = List()
     var resultScoreList : List[Int] = List()
     var t = 0

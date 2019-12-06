@@ -1,28 +1,106 @@
 @(results: List[List[String]])
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <table class="searchResults">
-      <tr>
-        <th> Code Id </th>
-        <th> Name </th>
-        <th> Offense Group</th>
-        <th> Occurs Time</th>
-        <th> Street</th>
-        <th>Lat</th>
-        <th>Long</th>
-      </tr>
-    @for(s <- results){
-      <tr>
-        @for(e <- s){
-          <td>@e</td>
-        }
-      </tr>
+@*<!DOCTYPE html>*@
+@*<html lang="en">*@
+@*<head>*@
+@*    <meta charset="UTF-8">*@
+@*    <title>Title</title>*@
+@*</head>*@
+@*<body>*@
+@*    <table class="searchResults">*@
+@*      <tr>*@
+@*        <th> Code Id </th>*@
+@*        <th> Name </th>*@
+@*        <th> Offense Group</th>*@
+@*        <th> Occurs Time</th>*@
+@*        <th> Street</th>*@
+@*        <th>Lat</th>*@
+@*        <th>Long</th>*@
+@*      </tr>*@
+@*    @for(s <- results){*@
+@*      <tr>*@
+@*        @for(e <- s){*@
+@*          <td>@e</td>*@
+@*        }*@
+@*      </tr>*@
+@*    }*@
+@*    </table>*@
+@*</body>*@
+@*</html>*@
+@main("TextRankResult") {
+    @defining(play.core.PlayVersion.current) { version =>
+
+    <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Title</title>
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@@1.6.0/dist/leaflet.css"
+                integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+                crossorigin=""/>
+                <script src="https://unpkg.com/leaflet@@1.6.0/dist/leaflet.js"
+                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                crossorigin=""></script>
+
+            </head>
+            <body>
+                <section id="content">
+                    <div class="wrapper doc">
+                        <table cellpadding="10">
+                            <tr>
+                                <th>INCIDENT_NUMBER</th>
+                                <th>OFFENSE_CODE_GROUP</th>
+                                <th>OCCURRED_ON_DATE</th>
+                                <th>STREET</th>
+                                <th>Lat</th>
+                                <th>Long</th>
+                            </tr>
+                            @for(result <- results) {
+                                <tr>
+                                @for(r <- result) {
+                                    <td>@r</td>
+                                }
+                                </tr>
+                            }
+                        </table>
+                        <br><br>
+                        <div id="mapid" style="width: 1000px;
+                            height: 800px;
+                            display: inline-block"></div>
+                    </div>
+                </section>
+                <script type="text/javascript">
+                        let r = window.location.search.substr(1);
+                        console.log(r);
+                        let mymap = L.map('mapid').setView([42.358929, -71.058823], 13);
+                        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                            maxZoom: 18,
+                            id: 'mapbox/streets-v11',
+                            accessToken: 'pk.eyJ1IjoidGlhbmp1IiwiYSI6ImNrM3Q4cmU4cjAwYm4za25rbGU2a3JicHcifQ.oyS4Lf8QqdXFb9MQ2VlWYQ'
+                        }).addTo(mymap);
+
+
+                        let marker;
+                        @for(result <- results) {
+                        marker = L.marker([@result(4), @result(5)]).addTo(mymap);
+                        marker.bindPopup("<b>Offense Type:" + "@result(1)"
+                                + "</b><br>Occurred Date:" + "@result(2)"
+                                + "<br>Street:" + "@result(3)").openPopup();
+                        }
+
+                        // console.log(mockData.length, mockData[0])
+                        //     let marker = new Array(mockData.length)
+                        // for(let i = 0; i < mockData.length; i++){
+                        //     marker[i] = L.marker([mockData[i].Lat, mockData[i].Long]).addTo(mymap)
+                        //     marker[i].bindPopup("<b>Offense Type:" + mockData[i].OFFENSE_CODE_GROUP
+                        //             + "</b><br>Occurred Date:" + mockData[i].OCCURRED_ON_DATE
+                        //             + "<br>Street:" + mockData[i].STREET).openPopup();
+                        // }
+
+                </script>
+            </body>
+        </html>
     }
-    </table>
-</body>
-</html>
+}
+
+

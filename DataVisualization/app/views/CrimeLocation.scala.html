@@ -1,19 +1,63 @@
 @()
     @main("CrimeLocation") {
         @defining(play.core.PlayVersion.current) { version =>
-            <section id="content">
-                <div class="wrapper doc">
-                    <article>
-                        <p class = "introduction">Use K-means algorithm to get 10 cluseters of crime location according to longitude and latitudea</p>
-                        <p class = "chart"><img src="assets/images/KMeansResult.png" alt="Request and response"/></p>
-                        <p class = "introduction">In Jupyter, show heatmap of crimes with Folium library</p>
-                        <p class = "chart"><img src="assets/images/MotorVehicleAccident.png" alt="Request and response"/></p>
-                        <p class = "introduction">Plot clusters on the Boston map</p>
-                        <p class = "chart"><img src="assets/images/AccidentCluster.png" alt="Request and response"/></p>
-                    </article><aside>
-                    @commonSidebar()
-                </aside>
-                </div>
-            </section>
+        <!DOCTYPE html>
+            <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Title</title>
+                    <link rel="stylesheet" href="https://unpkg.com/leaflet@@1.6.0/dist/leaflet.css"
+                    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+                    crossorigin=""/>
+                    <script src="https://unpkg.com/leaflet@@1.6.0/dist/leaflet.js"
+                    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                    crossorigin=""></script>
+
+                </head>
+                <body>
+                    <section id="content">
+                        <div class="wrapper doc">
+                            <article>
+                                <p class = "introduction">
+                                    Use K-means algorithm to get 10 cluseters of crime location according to longitude and latitudea</p>
+                                <p class = "chart"><img src="assets/images/KMeansResult.png" alt="Request and response"/></p>
+                                <p class = "introduction">In Jupyter, show heatmap of crimes with Folium library</p>
+                                <p class = "chart"><img src="assets/images/MotorVehicleAccident.png" alt="Request and response"/></p>
+                            </article>
+                            <aside>
+                            @commonSidebar()
+                            </aside>
+                            <div id="mapid" style="width: 950px;
+                                height: 800px;
+                                display: inline-block"></div>
+
+                        </div>
+                    </section>
+                    <script type="text/javascript">
+                            let r = window.location.search.substr(1);
+                            console.log(r);
+                            let mymap = L.map('mapid').setView([42.358929, -71.058823], 13);
+                            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                                maxZoom: 18,
+                                id: 'mapbox/streets-v11',
+                                accessToken: 'pk.eyJ1IjoidGlhbmp1IiwiYSI6ImNrM3Q4cmU4cjAwYm4za25rbGU2a3JicHcifQ.oyS4Lf8QqdXFb9MQ2VlWYQ'
+                            }).addTo(mymap);
+
+
+                            L.marker([42.337170, -71.075436]).addTo(mymap)
+                            L.marker([42.358284, -71.060151]).addTo(mymap)
+                            L.marker([42.359682, -71.125615]).addTo(mymap)
+                            L.marker([42.372825, -71.065957]).addTo(mymap)
+                            L.marker([42.368745, -71.040402]).addTo(mymap)
+                            L.marker([42.327528, -71.057069]).addTo(mymap)
+                            L.marker([42.313024, -71.077571]).addTo(mymap)
+                            L.marker([42.314067, -71.102221]).addTo(mymap)
+                            L.marker([42.303542, -71.065528]).addTo(mymap)
+                            L.marker([42.343135, -71.041523]).addTo(mymap)
+
+
+                    </script>
+                </body></html>
         }
     }

@@ -1,0 +1,21 @@
+@(userForm: Form[BasicForm])(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+
+    @main("Simple Form") {
+        @defining(play.core.PlayVersion.current) { version =>
+          <section id="content">
+            <div class="wrapper doc" style = "margin:0 auto; text-align: center">
+
+            @helper.form(action = helper.CSRF(routes.HomeController.simpleFormPost())) {
+                @helper.inputText(userForm("month"))
+                @helper.inputText(userForm("day"))
+                @helper.inputText(userForm("year"))
+                @helper.inputText(userForm("street"))
+                @helper.inputText(userForm("ty"))
+                <input style = "display:inline-block; width:150px; height:30px; margin-left: 100px" type="submit" value="Submit">
+            }
+
+          <aside>@commonSidebar()</aside>
+            </div>
+          </section>
+        }
+    }
