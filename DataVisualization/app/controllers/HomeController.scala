@@ -2,7 +2,6 @@ package controllers
 
 import javax.inject._
 import models.BasicForm
-import play.api._
 import play.api.mvc._
 
 import scala.io.Source
@@ -139,7 +138,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def getSearchResult(formdata : BasicForm): List[List[String]] ={
-    var bufferedSource = Source.fromFile("/Users/steve/IDEAProjects/CSYE7200_FinalProject/DataVisualization/app/controllers/data2.csv")
+    var bufferedSource = Source.fromFile("/Users/steve/IDEAProjects/CSYE7200_FinalProject/DataVisualization/app/controllers/data_r.csv")
     // var bufferedSource = Source.fromFile("/Users/saigou/Downloads/data.csv")
     var resultList: List[List[String]] = List()
     var resultScoreList : List[Int] = List()
@@ -174,12 +173,9 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
         //println("in that")
       }
       println(resultList.length + "     " + t);
-      if (t == 30) return resultList;
+      // if (t == 30) return resultList;
     }
     return resultList;
   }
 
-//  def index() = Action { implicit request: Request[AnyContent] =>
-//    Ok(views.html.basicForm(BasicForm.form))
-//  }
 }

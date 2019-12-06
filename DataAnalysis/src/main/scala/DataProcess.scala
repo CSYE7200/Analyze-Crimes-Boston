@@ -116,14 +116,10 @@ object DataAnalysis {
   import DA.spark.implicits._
 
   def main(args: Array[String]): Unit = {
-    val (columns, initDf) = DA.read("static/crime.csv")
+    val (columns, initDf) = DA.read("src/finalCSV.csv")
 
     val ds: Dataset[Crimes] = initDf.as[Crimes]
     ds.collect()
     ds.show
-//        val s = ds.select($"offenseCodeGroup").groupBy($"offenseCodeGroup").count
-//        s.show
-    //    ds.show()
-    //    ds.printSchema()
   }
 }

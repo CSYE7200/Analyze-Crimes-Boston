@@ -2,7 +2,6 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.Dataset
 
 import scala.annotation.tailrec
-import scala.collection.mutable.HashMap
 import scala.collection.{GenMap, GenSeq}
 
 
@@ -110,8 +109,7 @@ object KMeansLocCluster {
     Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
     Logger.getLogger("org.eclipse.jetty.server").setLevel(Level.OFF)
 
-    // val (columns, initDf) = DA.read("static/crime.csv")
-    val (columns, initDf) = DA.read("src/crime.csv")
+    val (columns, initDf) = DA.read("src/finalCSV.csv")
     val ds: Dataset[Crimes] = initDf.as[Crimes]
     val kMeans = new KMeans
     val loc = ds.filter(x => x.latitude != -1.0 && x.longitude != -1.0) // filter incorrect values
@@ -134,7 +132,7 @@ object KMeansLocCluster {
 
     location.persist()
     val resultPoints = kMeans.kMeans(location.collect(), initialPoints, 50, 0)
-//    resultPoints.foreach(println)
+    resultPoints.foreach(println)
 
   val cluster = kMeans.classify(location.collect(), resultPoints)
     cluster.map(x => x._2.size).foreach(println)
@@ -145,19 +143,5 @@ object KMeansLocCluster {
     .map(r => r.reduce(_+_)/r.length)
 
   SSE.foreach(println)
-
-  val oldMeans = Seq(
-    Point(0, 6),
-    Point(0, -6)
-  )
-
-  var e1 = HashMap[Point, Seq[Point]]()
-  val s1 = Seq(Point(0, 4), Point(0, 5))
-  var e2 = e1 + (Point(0, 6) -> s1 )
-  val s2 = Seq(Point(0, -4), Point(0, -5))
-  val testMap = e2 + (Point(0, -6) -> s2)
-
-//  val exactualRes = kMeans.update(testMap, oldMeans)
-//    print(exactualRes)
   }
 }

@@ -1,9 +1,8 @@
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql._
-import org.apache.spark.sql.types._
 import org.scalatest.{BeforeAndAfter, FunSuite, Matchers}
+
 import scala.collection.mutable.HashMap
-import scala.collection.{GenMap, GenSeq}
 import org.scalactic.TolerantNumerics
 
 case class Point(val x: Double, val y: Double) {
@@ -79,9 +78,9 @@ class KMeansLocClusterSpec extends FunSuite with Matchers with BeforeAndAfter {
       Point(0, -6)
     )
 
-    var e1 = HashMap[Point, Seq[Point]]()
+    val e1 = HashMap[Point, Seq[Point]]()
     val s1 = Seq(Point(0, 4), Point(0, 5))
-    var e2 = e1 + (Point(0, 6) -> s1 )
+    val e2 = e1 + (Point(0, 6) -> s1 )
     val s2 = Seq(Point(0, -4), Point(0, -5))
     val testMap = e2 + (Point(0, -6) -> s2)
 
