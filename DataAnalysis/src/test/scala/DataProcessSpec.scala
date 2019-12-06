@@ -18,25 +18,25 @@ class DataProcessSpec extends FunSuite with Matchers with BeforeAndAfter {
     import sQLContext.implicits._
 
     val DA = new DataAnalysis
-    val (columns, actualDF) = DA.read("static/testDA.csv")
+    val (columns, actualDF) = DA.read("static/testDataProcess.csv")
 
     val expectedSchema = List(
-      StructField("id", StringType, nullable = false),
-      StructField("offenseCode", IntegerType, nullable = false),
-      StructField("offenseCodeGroup", StringType, nullable = false),
-      StructField("offenseDescription", StringType, nullable = false),
-      StructField("year", IntegerType, nullable = true),
-      StructField("month", IntegerType, nullable = false),
-      StructField("date", IntegerType, nullable = false),
-      StructField("hour", IntegerType, nullable = false),
-      StructField("dayOfWeek", StringType, nullable = false),
-      StructField("street", StringType, nullable = true),
-      StructField("latitude", DoubleType, nullable = false),
-      StructField("longitude", DoubleType, nullable = false)
+    StructField("id", StringType, nullable = false),
+    StructField("offenseCode", IntegerType, nullable = false),
+    StructField("offenseCodeGroup", StringType, nullable = false),
+    StructField("offenseDescription", StringType, nullable = false),
+    StructField("year", IntegerType, nullable = true),
+    StructField("month", IntegerType, nullable = false),
+    StructField("date", IntegerType, nullable = false),
+    StructField("hour", IntegerType, nullable = false),
+    StructField("dayOfWeek", StringType, nullable = false),
+    StructField("street", StringType, nullable = true),
+    StructField("latitude", DoubleType, nullable = false),
+    StructField("longitude", DoubleType, nullable = false)
     )
 
     val expectedData = Seq(
-      Row("I182070945", 619, "Larceny", "LARCENY ALL OTHERS", 2018, 9, 2, 13, "Sunday", "LINCOLN ST", 42.35779134, -71.13937053)
+      Row("I182070943", 1402, "Vandalism", "VANDALISM", 2018, 8, 21, 0, "Tuesday", "HECLA ST", 42.30682138, -71.06030035)
     )
 
     val expectedDF = spark.createDataFrame(
@@ -44,8 +44,8 @@ class DataProcessSpec extends FunSuite with Matchers with BeforeAndAfter {
       StructType(expectedSchema)
     )
 
-    assert(expectedDF.count().equals(actualDF.count()))
-    assert(expectedDF.except(actualDF).isEmpty)
+    expectedDF.count() should equal (actualDF.count())
+    expectedDF.except(actualDF).count() should equal(0)
   }
 
 }
