@@ -106,7 +106,7 @@ object KMeansLocCluster {
   import DA.spark.implicits._
 
   def main(args: Array[String]): Unit = {
-    // 屏蔽不必要的日志显示终端上
+    // ignore unnecessary log
     Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
     Logger.getLogger("org.eclipse.jetty.server").setLevel(Level.OFF)
 
@@ -137,8 +137,10 @@ object KMeansLocCluster {
 //    resultPoints.foreach(println)
 
   val cluster = kMeans.classify(location.collect(), resultPoints)
+    cluster.map(x => x._2.size).foreach(println)
 
-  val SSE = cluster
+
+    val SSE = cluster
     .map(p => p._2.map(q => Math.pow(q.x - p._1.x, 2) + Math.pow(q.y - p._1.y, 2)))
     .map(r => r.reduce(_+_)/r.length)
 
@@ -155,7 +157,7 @@ object KMeansLocCluster {
   val s2 = Seq(Point(0, -4), Point(0, -5))
   val testMap = e2 + (Point(0, -6) -> s2)
 
-  val exactualRes = kMeans.update(testMap, oldMeans)
-    print(exactualRes)
+//  val exactualRes = kMeans.update(testMap, oldMeans)
+//    print(exactualRes)
   }
 }

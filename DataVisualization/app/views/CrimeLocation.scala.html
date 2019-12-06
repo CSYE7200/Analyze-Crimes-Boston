@@ -23,6 +23,7 @@
                                 <p class = "chart"><img src="assets/images/KMeansResult.png" alt="Request and response"/></p>
                                 <p class = "introduction">In Jupyter, show heatmap of crimes with Folium library</p>
                                 <p class = "chart"><img src="assets/images/MotorVehicleAccident.png" alt="Request and response"/></p>
+                                <p class = "introduction">Plot clusters on the Boston map</p>
                             </article>
                             <aside>
                             @commonSidebar()
@@ -45,16 +46,26 @@
                             }).addTo(mymap);
 
 
-                            L.marker([42.337170, -71.075436]).addTo(mymap)
-                            L.marker([42.358284, -71.060151]).addTo(mymap)
-                            L.marker([42.359682, -71.125615]).addTo(mymap)
-                            L.marker([42.372825, -71.065957]).addTo(mymap)
-                            L.marker([42.368745, -71.040402]).addTo(mymap)
-                            L.marker([42.327528, -71.057069]).addTo(mymap)
-                            L.marker([42.313024, -71.077571]).addTo(mymap)
-                            L.marker([42.314067, -71.102221]).addTo(mymap)
-                            L.marker([42.303542, -71.065528]).addTo(mymap)
-                            L.marker([42.343135, -71.041523]).addTo(mymap)
+                            let marker1 = L.marker([42.337170, -71.075436]).addTo(mymap)
+                            marker1.bindPopup("<b>Count:26549<br>SSE:5.084118930388495E-4</b>").openPopup();
+                            let marker2 = L.marker([42.358284, -71.060151]).addTo(mymap)
+                            marker2.bindPopup("<b>Count:31760<br>SSE:1.718464393275111E-4</b>").openPopup();
+                            let marker3 = L.marker([42.359682, -71.125615]).addTo(mymap)
+                            marker3.bindPopup("<b>Count:10796<br>SSE:8.296587785436172E-5</b>").openPopup();
+                            let marker4 =  L.marker([42.372825, -71.065957]).addTo(mymap)
+                            marker4.bindPopup("<b>Count:12608<br>SSE:1.901822079048397E-4</b>").openPopup();
+                            let marker5 = L.marker([42.368745, -71.040402]).addTo(mymap)
+                            marker5.bindPopup("<b>Count:50634<br>SSE:1.3857104336613212E-4</b>").openPopup();
+                            let marker6 = L.marker([42.327528, -71.057069]).addTo(mymap)
+                            marker6.bindPopup("<b>Count:29940<br>SSE:1.6335977766270378E-4</b>").openPopup();
+                            let marker7 = L.marker([42.313024, -71.077571]).addTo(mymap)
+                            marker7.bindPopup("<b>Count:55552<br>1.7865605682373397E-4</b>").openPopup();
+                            let marker8 = L.marker([42.314067, -71.102221]).addTo(mymap)
+                            marker8.bindPopup("<b>Count:18928<br>SSE:1.8640020339462306E-4</b>").openPopup();
+                            let marker9 = L.marker([42.303542, -71.065528]).addTo(mymap)
+                            marker9.bindPopup("<b>Count:33638<br>SSE:6.26468060322323E-5</b>").openPopup();
+                            let marker10 = L.marker([42.343135, -71.041523]).addTo(mymap)
+                            marker10.bindPopup("<b>Count:21201<br>SSE:1.4803906267945457E-4</b>").openPopup();
 
 
                     </script>
