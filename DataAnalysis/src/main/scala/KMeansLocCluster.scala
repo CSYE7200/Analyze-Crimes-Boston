@@ -140,8 +140,8 @@ object KMeansLocCluster {
 
     val SSE = cluster
     .map(p => p._2.map(q => Math.pow(q.x - p._1.x, 2) + Math.pow(q.y - p._1.y, 2)))
-    .map(r => r.reduce(_+_)/r.length)
+    .map(r => r.reduce(_+_)).sum
 
-  SSE.foreach(println)
+println(SSE)
   }
 }
