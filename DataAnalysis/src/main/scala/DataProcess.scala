@@ -117,9 +117,13 @@ object DataAnalysis {
 
   def main(args: Array[String]): Unit = {
     val (columns, initDf) = DA.read("src/finalCSV.csv")
-
     val ds: Dataset[Crimes] = initDf.as[Crimes]
     ds.collect()
     ds.show
+
+    val sc = DA.spark.sparkContext.textFile("src/finalCSV.csv")
+    val list = List("ads","dsa")
+    val RDD = sc.flatMap(m => m.split(",")).filter(n => !list.contains(n)).map(n => (n,1)).reduceByKey(_+_).sortByKey()
+    RDD.take(10).foreach(println)
   }
 }
